@@ -78,7 +78,7 @@ public class Reciept {
 
        public static void main(String[] args) {
            Reciept r1 = new Reciept();
-           r1.setCereal(5);
+           r1.setCereal(4);
            System.out.println(r1.getDiscount());
         
     }
