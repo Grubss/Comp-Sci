@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classproject;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+//import java.util.ArrayList;
+//import java.util.Scanner;
 
 
 public class Customer {
@@ -65,7 +65,7 @@ public double getcLoyalty(){
         System.out.println("Loyalty Points: " + customer.getcLoyalty());
     }
 
- public static void main(String[] args) {
+ /*public static void main(String[] args) {
           
      ArrayList<Customer> customers = new ArrayList<>();
      Scanner in = new Scanner(System.in);
@@ -104,5 +104,5 @@ public double getcLoyalty(){
     
 
  
-
+*/
 }
