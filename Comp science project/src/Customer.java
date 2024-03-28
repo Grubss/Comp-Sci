@@ -30,8 +30,8 @@ public class Customer {
  
  
  
- public void setcName(String newcName){
-     cName = newcName;
+ public void setcName(String cName){
+     this.cName = cName;
  }
  
  public void setcID(int newcID){
