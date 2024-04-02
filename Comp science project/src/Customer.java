@@ -41,28 +41,29 @@ public class Customer {
      cLoyalty= newcLoyalty;
  }
  
-    @Override
- public String toString(){
-     return "Name: " + cName + "\n" + "Customer ID: " + cID + "\n" + "Loyalty points: " + cLoyalty + "\n" ;
-}
+ 
 
  
  public String getcName(){
      return cName;
  }
- public double getcID(){
+ public int getcID(){
      return cID;
  }
  
-public double getcLoyalty(){
+public int getcLoyalty(){
     return cLoyalty;
+}
+   @Override
+ public String toString(){
+     return "Name: " + getcName() + "\n" + "Customer ID: " + getcID() + "\n" + "Loyalty points: " + getcLoyalty() + "\n" ;
 }
 
  public static void displayCustomer(Customer customer) {
         System.out.println("Customer Information:");
-        System.out.println("Name: " + customer.getcName());
+        System.out.println("Name: to" + customer.getcName());
         System.out.println("Customer ID: " + customer.getcID());
-        System.out.println("Loyalty Points: " + customer.getcLoyalty());
+        System.out.println("Loyalty Points:" + customer.getcLoyalty());
     }
 
  /*public static void main(String[] args) {
