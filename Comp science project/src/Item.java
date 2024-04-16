@@ -1,5 +1,6 @@
 
 public class Item {
+    private String name;
     private double price;
     private double discountAmount;
     private double discountEach;
@@ -8,14 +9,22 @@ public class Item {
     public Item(){
         
     }
-    public Item(double price, double discountAmount, double discountEach){
+    public Item(String name, double price, double discountAmount, double discountEach){
+        this.name = name;
         this.price = price;
         this.discountAmount = discountAmount;
         this.discountEach = discountEach;
     }
     
     /*
-    Sets price of the istem.
+    Sets name for the item.
+    @param name The name for the item.
+    */
+    public void setName(String name){
+        this.name = name;
+    }
+    /*
+    Sets price of the item.
     @param price The price that is set.
     */
     public void setPrice(double price){
@@ -38,6 +47,13 @@ public class Item {
         this.discountEach = discountEach;
     }
     //Getters
+    /*
+    Gets the name of the item
+    @return the name
+    */
+    public String getName(){
+        return name;
+    }
     /*
     Gets the price of the item.
     @return the price

@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 /*
@@ -12,34 +13,54 @@ import java.util.Scanner;
  * @author bjcra
  */
 public class MainTester {
+    static int inputCheckerInt(){
+        Scanner input = new Scanner(System.in);
+        while(!input.hasNextInt()){
+               System.out.println("input valid number");
+               input.next();
+           }
+       int i= input.nextInt();
+       input.close();
+        return i;
+         
+    }
 
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         //needed for the first switch check
         int select;
+        boolean exit = true;
+        
+        
         //needed for editing customers
         int tempID;
         int tempPoints;
         //the start of the main body. The do loop allows the switch case to run indefinitely while the 4th case is not selected 
         do {
+            
             System.out.println("Creat new customer: 1");
             System.out.println("Edit Customer: 2");
             System.out.println("Delete Customer: 3");
             System.out.println("Exit: 4");
-            select = in.nextInt();
-//checking for valid input for the switch
-            if (select <= 4 || select >= 1) {
-
-                switch (select) {
+            
+           
+               
+              select = inputCheckerInt();
+           
+           
+               
+           
+               
+               switch (select) {
                     //Case 1 allows the creation of the new Customer and adds it to an array list. The name is the only input neccasairy as the id is random generated between 1 and 9999, 
                     //and the loyalty points should default as 0. They are added to the 0 position as to make it a consisten search.
                     //(might change this as there could be a command to fetch the last index of an array)
                     case 1:
-                        System.out.println("Please enter your name");
-                        in.nextLine();
+                        System.out.println("Please enter your name ");
+                        
 
-                        customers.add(0, new Customer(in.nextLine(), (int) (Math.random() * 10000), 0));
+                 customers.add(0, new Customer(in.nextLine(), (int) (Math.random() * 10000), 0));
                         //prints out the name, id, and loyalty points
                         System.out.println(customers.get(0));
                         System.out.println("");
@@ -49,14 +70,14 @@ public class MainTester {
                         Customer tempCustomer = new Customer();
                         System.out.println("Search an ID to edit");
                         //saves the id for the "for" loop
-                        int i = in.nextInt();
+                        int idEntry = in.nextInt();
                         //finds the iteration of the arraylist that matches id
                         for (Customer search : customers) {
 
-                            if (search.getId() == i) {
+                            if (search.getId() == idEntry) {
                                 System.out.println(search);
                                 //saves the index position
-                                int p = customers.indexOf(search);
+                                int index = customers.indexOf(search);
                                 //begin editing the customer data by saving to the tempCustomer
                                 System.out.println("Input new customer name:");
                                 in.nextLine();
@@ -66,7 +87,7 @@ public class MainTester {
                                 do {
                                     System.out.println("Input new Id between 1 and 9999: ");
                                     tempID = in.nextInt();
-                                } while (tempID >= 10000 && tempID <= 0);
+                                } while (tempID >= 10000 || tempID <= 0);
                                 tempCustomer.setId(tempID);
                                 //repeats so that the loyalty points is a valid input that is greater than or equal to 0
                                 do {
@@ -74,24 +95,53 @@ public class MainTester {
                                     tempPoints = in.nextInt();
                                 } while (tempPoints < 0);
                                 tempCustomer.setLoyalty(tempPoints);
-                                //Sets the tempCustomer as the a replacement for the object at the p position 
-                                customers.set(p, tempCustomer);
+                                //Sets the tempCustomer as the a replacement for the object at the index position 
+                                customers.set(index, tempCustomer);
                             }
                         }
                         break;
-
+                        //removes index position containing the customer id
                     case 3:
-                        for (Customer s : customers) {
-                            System.out.println(s);
-                            System.out.println("");
-                        }
+                        System.out.println("Search id to delete");
+                        //saves the id for the "for" loop
+                        idEntry = in.nextInt();
+                         for (Customer search : customers) {
 
+                            if (search.getId() == idEntry) {
+                                System.out.println(search);
+                                //saves the index position
+                                int index = customers.indexOf(search);
+                                customers.remove(index);
+                                
+                                break;
+                            }
+                         
+                         }
+                    case 4:
+                    exit = false;
+                    break;
+                         
+                    default:
+                        System.out.println("Enter valid input");
+                        break;
+                  
+                        
+                        
+
+                
+
+              
                 }
+               
+           
+          
 
-                //Case 3 is how to remove customers
-            }
+           
 
-        } while (select != 4);
+                
+
+        } while (exit);
+//        System.out.println(customers);
     }
 
 }
