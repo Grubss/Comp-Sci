@@ -18,10 +18,18 @@ public class MainTester {
         while(!input.hasNextInt()){
                System.out.println("input valid number");
                input.next();
+              
            }
-       int i= input.nextInt();
-       input.close();
-        return i;
+        return input.nextInt();
+    }
+    
+    static double inputCheckerDouble(){
+        Scanner input = new Scanner(System.in);
+        while(!input.hasNextDouble()){
+               System.out.println("input valid number");
+               input.next();
+           }
+       return input.nextDouble();
          
     }
 
@@ -86,13 +94,13 @@ public class MainTester {
                                 //repeats so that the id is a valid input between 1 and 9999
                                 do {
                                     System.out.println("Input new Id between 1 and 9999: ");
-                                    tempID = in.nextInt();
+                                    tempID = inputCheckerInt();
                                 } while (tempID >= 10000 || tempID <= 0);
                                 tempCustomer.setId(tempID);
                                 //repeats so that the loyalty points is a valid input that is greater than or equal to 0
                                 do {
                                     System.out.println("Input loyalty points: ");
-                                    tempPoints = in.nextInt();
+                                    tempPoints = inputCheckerInt();
                                 } while (tempPoints < 0);
                                 tempCustomer.setLoyalty(tempPoints);
                                 //Sets the tempCustomer as the a replacement for the object at the index position 
@@ -141,7 +149,7 @@ public class MainTester {
                 
 
         } while (exit);
-//        System.out.println(customers);
+        System.out.println(customers);
     }
 
 }
