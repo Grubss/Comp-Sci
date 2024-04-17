@@ -77,7 +77,7 @@ public class Customer {
      */
     @Override
     public String toString(){
-        return "Customer name: "+ name+ "\nCustomer id: "+ id+ "\nCustomer Loyalty: "+ points;
+        return "Customer name: "+ name+ "\nCustomer id: "+ id+ "\nCustomer Loyalty: "+ points+"\n";
     }
     
 }
