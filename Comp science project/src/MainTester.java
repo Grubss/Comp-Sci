@@ -14,26 +14,6 @@ import java.util.Scanner;
  */
 public class MainTester {
 
-    static int inputCheckerInt() {
-        Scanner input = new Scanner(System.in);
-        while (!input.hasNextInt()) {
-            System.out.println("input valid number");
-            input.next();
-
-        }
-        return input.nextInt();
-    }
-
-    static double inputCheckerDouble() {
-        Scanner input = new Scanner(System.in);
-        while (!input.hasNextDouble()) {
-            System.out.println("input valid number");
-            input.next();
-        }
-        return input.nextDouble();
-
-    }
-
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
         Scanner in = new Scanner(System.in);
@@ -171,8 +151,8 @@ public class MainTester {
                     } while (nestExit);
                     nestExit = true;
                     break;
-                    
-                    //reciept related case in the switch edit as needed
+
+                //reciept related case in the switch edit as needed
                 case 3:
                     do {
 
@@ -206,5 +186,24 @@ public class MainTester {
         } while (exit);
         //System.out.println(customers);
     }
+//A method for input valid integer. Excludes letter characters
+    static int inputCheckerInt() {
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt()) {
+            System.out.println("input valid number");
+            input.next();
 
+        }
+        return input.nextInt();
+    }
+//A method for input validation double. Excludes letter characters
+    static double inputCheckerDouble() {
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextDouble()) {
+            System.out.println("input valid number");
+            input.next();
+        }
+        return input.nextDouble();
+
+    }
 }
