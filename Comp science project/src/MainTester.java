@@ -16,6 +16,7 @@ public class MainTester {
 
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         //needed for the first switch check
         int select;
@@ -28,7 +29,10 @@ public class MainTester {
         int tempPoints;
         //the start of the main body. The do loop allows the switch case to run indefinitely while the 4th case is not selected 
         do {
-
+            if (nestExit==false){
+                nestExit = true;
+            }
+                
             System.out.println("Customer: 1");
             System.out.println("Item: 2");
             System.out.println("receipt: 3");
@@ -66,7 +70,7 @@ public class MainTester {
                                 Customer tempCustomer = new Customer();
                                 System.out.println("Search an ID to edit");
                                 //saves the id for the "for" loop
-                                int idEntry = in.nextInt();
+                                int idEntry = inputCheckerInt();
                                 //finds the iteration of the arraylist that matches id
                                 for (Customer search : customers) {
 
@@ -100,7 +104,7 @@ public class MainTester {
                             case 3:
                                 System.out.println("Search id to delete");
                                 //saves the id for the "for" loop
-                                idEntry = in.nextInt();
+                                idEntry = inputCheckerInt();
                                 for (Customer search : customers) {
 
                                     if (search.getId() == idEntry) {
@@ -119,37 +123,58 @@ public class MainTester {
 
                             default:
                                 System.out.println("Enter valid input");
-                                break;
+                                
 
                         }
                     } while (nestExit);
-                    nestExit = true;
+                    
                     break;
 //item related case in the switch edit as needed
                 case 2:
                     do {
+                        System.out.println("Creat new Item: 1");
+                        System.out.println("Edit Item: 2");
+                        System.out.println("Delete Item: 3");
+                        System.out.println("Show Items: 4");
+                        System.out.println("Exit: 5");
 
                         nestSelect = inputCheckerInt();
 
                         switch (nestSelect) {
-
+                           
                             case 1:
-
+                                 Item item = new Item();
+                                 System.out.println("Enter new Item name");
+                                 in.nextLine();
+                                 item.setName(in.nextLine());
+                                 System.out.println("Enter Item price");
+                                 item.setPrice(inputCheckerDouble());
+                                 System.out.println("Enter item discount amount as a percentage");
+                                 item.setDiscountAmount(inputCheckerDouble()/100);
+                                 System.out.println("Input the number of items needed for discount");
+                                 item.setDiscountEach(inputCheckerInt());
+                                 items.add(0, item);
+                                 break;
                             case 2:
+                                System.out.println("");
 
                             case 3:
-
+                                
                             case 4:
+                                System.out.println(items);
+                                break;
+
+                            case 5:
                                 nestExit = false;
                                 break;
 
                             default:
                                 System.out.println("Enter valid input");
-                                break;
+                              
 
                         }
                     } while (nestExit);
-                    nestExit = true;
+                    
                     break;
 
                 //reciept related case in the switch edit as needed
@@ -172,11 +197,11 @@ public class MainTester {
 
                             default:
                                 System.out.println("Enter valid input");
-                                break;
+                                
 
                         }
                     } while (nestExit);
-                    nestExit = true;
+                   
                     break;
                 case 4:
                     exit = false;
