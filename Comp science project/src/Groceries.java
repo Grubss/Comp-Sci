@@ -16,12 +16,15 @@ public class Groceries {
     private int amount;
     private double price;
 
+    /**
+     * The default constructor for the Groceries class.
+     */
     public Groceries() {
 
     }
 
-    /** Realized i could just use the variables "price" and "item"
-     * 
+    /** 
+     * The overloading constructor for the Groceries Class
      * @param item A variable that allows you to create your own item.
      * @param amount A variable that determines the items purchased amount
      * @param price A variable for determining the price for the item.
@@ -57,7 +60,7 @@ public class Groceries {
 
     /**
      * Gets the groceries item name.
-     * @return 
+     * @return item
      */
     public String getItem() {
         return item;
@@ -65,7 +68,7 @@ public class Groceries {
     
     /**
      * Gets the groceries item amount.
-     * @return 
+     * @return amount
      */
     public int getAmount() {
         return amount;
@@ -73,15 +76,11 @@ public class Groceries {
     
     /**
      * Gets the groceries item price.
-     * @return 
+     * @return price
      */
     public double getPrice() {
         return price;
     }
-    /**
-     * A "For" loop test for may class, hopefully i can get it working.
-     *
-     * @return Shampoo price and deals.
-     */
+    
 
 }
