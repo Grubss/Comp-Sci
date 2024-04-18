@@ -199,7 +199,7 @@ public class MainTester {
                                 System.out.println("");
                                 //assigns the arraylist and displays
                                 items.add(0, item);
-                                items.get(0);
+                                System.out.println(items.get(0));
                                 break;
                             case 2:
                                 //This case allows the user to edit an item by searching the name, saving the index of the item seacrhed
@@ -223,18 +223,18 @@ public class MainTester {
                                         do {
                                             System.out.println("Enter new item discount amount as a percentage");
                                             discSet = inputCheckerInt();
-                                        } while (discSet > 0);
+                                        } while (discSet < 0);
                                         search.setDiscountAmount(discSet / 100);
                                         System.out.println("");
                                         do {
                                             System.out.println("Input the new number of items needed for discount");
                                             discAmmSet = inputCheckerInt();
-                                        } while (discAmmSet > 0);
+                                        } while (discAmmSet < 0);
                                         search.setDiscountEach(discAmmSet);
                                         items.set(index, search);
                                         System.out.println("");
                                         items.get(index);
-                                    }else if (items.indexOf(search)+1==items.size()){
+                                    }else if (items.indexOf(search)==items.size()-1){
                                         System.out.println("Item not found");
                                     }
                                 }
