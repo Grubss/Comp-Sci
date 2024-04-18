@@ -17,6 +17,7 @@ public class MainTester {
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Item> items = new ArrayList<>();
+        ArrayList<Receipt> receipts = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         //needed for the first switch check
         //the select and exit correspond with the outer "do while" loop and switch
@@ -33,9 +34,10 @@ public class MainTester {
         int tempPoints;
         //needed for item creation and editing
         double priceSet;
-        int discSet;
+        double discSet;
         int discAmmSet;
         String itemSearch;
+        int eaches;
         //the start of the main body. The do loop allows the switch case to run indefinitely while the 4th case is not selected 
         do {
             //resets the nestExit so that the nested loops arent immediatly exited
@@ -74,9 +76,9 @@ public class MainTester {
 
                                 customers.add(0, new Customer(in.nextLine(), (int) (Math.random() * 10000), 0));
                                 //prints out the name, id, and loyalty points
-                                 System.out.println("");
+                                System.out.println("");
                                 System.out.println(customers.get(0));
-                               
+
                                 break;
                             //Case 2 allows the editing of the Customer by searching the random generated id and finding the index position of the object containg the id.
                             case 2:
@@ -93,7 +95,7 @@ public class MainTester {
                                         index = customers.indexOf(search);
                                         //begin editing the customer data by saving to the tempCustomer
                                         System.out.println("Input new customer name:");
-                                        
+
                                         tempCustomer.setName(in.nextLine());
                                         //System.out.println("");
                                         //repeats so that the id is a valid input between 1 and 9999
@@ -110,10 +112,10 @@ public class MainTester {
                                         tempCustomer.setLoyalty(tempPoints);
                                         //Sets the tempCustomer as the a replacement for the object at the index position 
                                         customers.set(index, tempCustomer);
-                                    }else if(customers.indexOf(search)==customers.size()-1){
+                                    } else if (customers.indexOf(search) == customers.size() - 1) {
                                         System.out.println("Customer not found");
                                     }
-                                    
+
                                 }
                                 break;
                             //removes index position containing the customer id
@@ -123,20 +125,20 @@ public class MainTester {
                                 idEntry = inputCheckerInt();
                                 for (Customer search : customers) {
                                     if (search.getId() == idEntry) {
-                                        
+
                                         index = customers.indexOf(search);
                                         customers.remove(index);
                                         //this break exits the for loop
                                         break;
-                                    }else if(customers.indexOf(search)==customers.size()-1){
+                                    } else if (customers.indexOf(search) == customers.size() - 1) {
                                         System.out.println("Customer not found");
-                                    }                                
-                               }
+                                    }
+                                }
                                 //this break exits the switch case
-                                 break;
+                                break;
                             case 4:
                                 //prints out all customers 
-                                for(Customer search:customers){
+                                for (Customer search : customers) {
                                     System.out.println(search);
                                 }
                                 break;
@@ -205,36 +207,41 @@ public class MainTester {
                                 //This case allows the user to edit an item by searching the name, saving the index of the item seacrhed
                                 //and prompting user input to assign new values. Then replaces the item at the position
                                 System.out.println("Input item name you want to edit");
-                                itemSearch=in.nextLine();
+                                itemSearch = in.nextLine();
                                 for (Item search : items) {
                                     //searches for name reguardless of caps
                                     if (search.getName().equalsIgnoreCase(itemSearch)) {
                                         index = items.indexOf(search);
                                         System.out.println(search);
+                                        //enter the new name for the item
                                         System.out.println("Enter new name of item");
                                         search.setName(in.nextLine());
                                         System.out.println("");
+                                        //enter the new price with input validation
                                         do {
                                             System.out.println("Enter new Item price");
                                             priceSet = inputCheckerDouble();
                                         } while (priceSet < 0);
                                         search.setPrice(priceSet);
                                         System.out.println("");
+                                        //input new discount with input validation
                                         do {
                                             System.out.println("Enter new item discount amount as a percentage");
                                             discSet = inputCheckerInt();
                                         } while (discSet < 0);
                                         search.setDiscountAmount(discSet / 100);
                                         System.out.println("");
+                                        //input the new discount eaches with input validation
                                         do {
                                             System.out.println("Input the new number of items needed for discount");
                                             discAmmSet = inputCheckerInt();
                                         } while (discAmmSet < 0);
                                         search.setDiscountEach(discAmmSet);
+                                        //
                                         items.set(index, search);
                                         System.out.println("");
-                                        items.get(index);
-                                    }else if (items.indexOf(search)==items.size()-1){
+                                        //if the 
+                                    } else if (items.indexOf(search) == items.size() - 1) {
                                         System.out.println("Item not found");
                                     }
                                 }
@@ -242,21 +249,21 @@ public class MainTester {
 
                             case 3:
                                 System.out.println("Enter name of item to delete");
-                                itemSearch=in.nextLine();
+                                itemSearch = in.nextLine();
                                 for (Item search : items) {
                                     //searches for name reguardless of caps
-                                    if (search.getName().equalsIgnoreCase(itemSearch)){
+                                    if (search.getName().equalsIgnoreCase(itemSearch)) {
                                         System.out.println(search);
                                         index = items.indexOf(search);
                                         items.remove(index);
                                         break;
-                                    }else if (items.indexOf(search)==items.size()-1){
+                                    } else if (items.indexOf(search) == items.size() - 1) {
                                         System.out.println("Item not found");
                                     }
                                 }
                                 break;
                             case 4:
-                                for (Item search: items){
+                                for (Item search : items) {
                                     System.out.println(search);
                                 }
                                 break;
@@ -276,13 +283,66 @@ public class MainTester {
                 //reciept related case in the switch edit as needed
                 case 3:
                     do {
+                        System.out.println("");
+                        System.out.println("Checkout: 1");
+                        System.out.println("View Receipt: 2");
+                        System.out.println("Exit: 3");
+                        System.out.println("");
 
                         nestSelect = inputCheckerInt();
 
                         switch (nestSelect) {
-
+                            //checkout
                             case 1:
+                                
+                                Receipt receipt = new Receipt();
+                                double i;
+                                
+                                
+                                do {
+                                    System.out.println("");
+                                    System.out.println("Add new item: 1");
+                                    System.out.println("Checkout: 2");
+                                    System.out.println("");
+                                    nestSelect = inputCheckerInt();
+                                    switch (nestSelect){
+                                    //add items to receipt
+                                        case 1:
+                                    System.out.println("Enter name of item you want to purchase");
+                                    itemSearch = in.nextLine();
+                                    for (Item search : items) {
+                                        //searches for name reguardless of caps
+                                        if (search.getName().equalsIgnoreCase(itemSearch)) {
+                                            System.out.println(search);
 
+                                            do {
+                                                System.out.println("How many would you like to buy?");
+                                                eaches = inputCheckerInt();
+                                            } while (eaches < 0);
+                                            receipt.setTotal(receipt.getTotal()+(eaches*search.getPrice()));
+                                            System.out.printf("\nSubtotal is: %.2f", receipt.getTotal());
+                                            System.out.println("");
+                                           i = (eaches/search.getDiscountEach())*search.getDiscountAmount()*search.getPrice();
+                                            System.out.printf("Item discounts: %.2f", i);
+                                            System.out.println("");
+                                            receipt.setTotal(receipt.getTotal()-i);
+                                            System.out.printf("Item total: %.2f", receipt.getTotal());
+                                            
+                                            break;
+                                        } else if (items.indexOf(search) == items.size() - 1) {
+                                            System.out.println("Item not found");
+                                        }
+                                    }break;
+                                    //checkout
+                                    case 2:
+                                        nestExit=false;
+                                    }
+                                } while (nestExit);
+                                nestExit=true;
+                                
+                                break;
+                                
+        
                             case 2:
 
                             case 3:
@@ -312,6 +372,8 @@ public class MainTester {
         //System.out.println(customers);
     }
 //A method for input valid integer. Excludes letter characters
+
+    
 
     static int inputCheckerInt() {
         Scanner input = new Scanner(System.in);
