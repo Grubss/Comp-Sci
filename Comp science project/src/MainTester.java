@@ -294,55 +294,58 @@ public class MainTester {
                         switch (nestSelect) {
                             //checkout
                             case 1:
-                                
+
                                 Receipt receipt = new Receipt();
-                                double i;
-                                
-                                
+                                double i= 0;
+
                                 do {
                                     System.out.println("");
                                     System.out.println("Add new item: 1");
                                     System.out.println("Checkout: 2");
                                     System.out.println("");
                                     nestSelect = inputCheckerInt();
-                                    switch (nestSelect){
-                                    //add items to receipt
+                                    switch (nestSelect) {
+                                        //add items to receipt
                                         case 1:
-                                    System.out.println("Enter name of item you want to purchase");
-                                    itemSearch = in.nextLine();
-                                    for (Item search : items) {
-                                        //searches for name reguardless of caps
-                                        if (search.getName().equalsIgnoreCase(itemSearch)) {
-                                            System.out.println(search);
+                                            System.out.println("Enter name of item you want to purchase");
+                                            itemSearch = in.nextLine();
+                                            for (Item search : items) {
+                                                //searches for name reguardless of caps
+                                                if (search.getName().equalsIgnoreCase(itemSearch)) {
+                                                    System.out.println(search);
 
-                                            do {
-                                                System.out.println("How many would you like to buy?");
-                                                eaches = inputCheckerInt();
-                                            } while (eaches < 0);
-                                            receipt.setTotal(receipt.getTotal()+(eaches*search.getPrice()));
-                                            System.out.printf("\nSubtotal is: %.2f", receipt.getTotal());
-                                            System.out.println("");
-                                           i = (eaches/search.getDiscountEach())*search.getDiscountAmount()*search.getPrice();
-                                            System.out.printf("Item discounts: %.2f", i);
-                                            System.out.println("");
-                                            receipt.setTotal(receipt.getTotal()-i);
-                                            System.out.printf("Item total: %.2f", receipt.getTotal());
-                                            
+                                                    do {
+                                                        System.out.println("How many would you like to buy?");
+                                                        eaches = inputCheckerInt();
+                                                    } while (eaches < 0);
+                                                    receipt.setTotal(receipt.getTotal() + (eaches * search.getPrice()));
+//                                                    
+                                                    i = (eaches / search.getDiscountEach()) * search.getDiscountAmount() * search.getPrice();
+                                                    receipt.setTotal(receipt.getTotal() - i);
+
+                                                    break;
+                                                } else if (items.indexOf(search) == items.size() - 1) {
+                                                    System.out.println("Item not found");
+                                                }
+                                            }
+                                           
                                             break;
-                                        } else if (items.indexOf(search) == items.size() - 1) {
-                                            System.out.println("Item not found");
-                                        }
-                                    }break;
-                                    //checkout
-                                    case 2:
-                                        nestExit=false;
+                                        //checkout
+                                        case 2:
+                                            nestExit = false;
                                     }
                                 } while (nestExit);
-                                nestExit=true;
-                                
+                                nestExit = true;
+                                 System.out.printf("\nSubtotal is: %.2f", receipt.getTotal());
+                                                    System.out.println("");
+                                            // System.out.printf("Item discounts: %.2f", i);
+                                                    System.out.println("");
+                                                   
+                                                    System.out.printf("Item total: %.2f", receipt.getTotal());
+                                                    System.out.println("");
+
                                 break;
-                                
-        
+
                             case 2:
 
                             case 3:
@@ -372,8 +375,6 @@ public class MainTester {
         //System.out.println(customers);
     }
 //A method for input valid integer. Excludes letter characters
-
-    
 
     static int inputCheckerInt() {
         Scanner input = new Scanner(System.in);
