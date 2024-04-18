@@ -3,13 +3,13 @@ public class Item {
     private String name;
     private double price;
     private double discountAmount;
-    private double discountEach;
+    private int discountEach;
     
     //Default constructor
     public Item(){
         
     }
-    public Item(String name, double price, double discountAmount, double discountEach){
+    public Item(String name, double price, double discountAmount, int discountEach){
         this.name = name;
         this.price = price;
         this.discountAmount = discountAmount;
@@ -43,7 +43,7 @@ public class Item {
     Sets the discount per item.
     @param discountEach the discount is set for each item.
     */
-    public void setDiscountEach(double discountEach){
+    public void setDiscountEach(int discountEach){
         this.discountEach = discountEach;
     }
     //Getters
@@ -74,7 +74,11 @@ public class Item {
     Gets the discount per item.
     @return the discount.
     */
-    public double getDiscountEach(){
+    public int getDiscountEach(){
         return discountEach;
+    }
+    @Override
+    public String toString(){
+        return "\nItem name: "+ name +"\nItem Price"+ price + "\nDiscount amount: %"+discountAmount*100+"\nAmount of items for discount "+discountEach+"\n";
     }
 }
