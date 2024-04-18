@@ -218,6 +218,7 @@ public class MainTester {
                                         System.out.println(search);
                                         index = items.indexOf(search);
                                         items.remove(index);
+                                        break;
                                     }
                                 }
                                 break;
