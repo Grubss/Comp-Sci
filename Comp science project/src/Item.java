@@ -79,6 +79,6 @@ public class Item {
     }
     @Override
     public String toString(){
-        return "\nItem name: "+ name +"\nItem Price"+ price + "\nDiscount amount: %"+discountAmount*100+"\nAmount of items for discount "+discountEach+"\n";
+        return "\nItem name: "+ name +"\nItem Price: "+ price + "\nDiscount amount: %"+discountAmount*100+"\nAmount of items for discount "+discountEach+"\n";
     }
 }

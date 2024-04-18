@@ -19,10 +19,13 @@ public class MainTester {
         ArrayList<Item> items = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         //needed for the first switch check
+        //the select and exit correspond with the outer "do while" loop and switch
         int select;
         boolean exit = true;
+        //the nestExit and nestSelect correspond with the nested "do while" loop and nested switch
         boolean nestExit = true;
         int nestSelect;
+        //used to store index for arraylist search to use later
         int index;
 
         //needed for editing customers
@@ -32,8 +35,10 @@ public class MainTester {
         double priceSet;
         int discSet;
         int discAmmSet;
+        String itemSearch;
         //the start of the main body. The do loop allows the switch case to run indefinitely while the 4th case is not selected 
         do {
+            //resets the nestExit so that the nested loops arent immediatly exited
             if (nestExit == false) {
                 nestExit = true;
             }
@@ -105,7 +110,10 @@ public class MainTester {
                                         tempCustomer.setLoyalty(tempPoints);
                                         //Sets the tempCustomer as the a replacement for the object at the index position 
                                         customers.set(index, tempCustomer);
+                                    }else if(customers.indexOf(search)==customers.size()-1){
+                                        System.out.println("Customer not found");
                                     }
+                                    
                                 }
                                 break;
                             //removes index position containing the customer id
@@ -118,14 +126,22 @@ public class MainTester {
                                         
                                         index = customers.indexOf(search);
                                         customers.remove(index);
+                                        //this break exits the for loop
                                         break;
+                                    }else if(customers.indexOf(search)==customers.size()-1){
+                                        System.out.println("Customer not found");
                                     }                                
                                }
+                                //this break exits the switch case
                                  break;
                             case 4:
-                                System.out.println(customers);
+                                //prints out all customers 
+                                for(Customer search:customers){
+                                    System.out.println(search);
+                                }
                                 break;
                             case 5:
+                                //this case exits the nested loop
                                 nestExit = false;
                                 break;
 
@@ -139,49 +155,60 @@ public class MainTester {
 //item related case in the switch edit as needed
                 case 2:
                     do {
+                        //options to choose from
                         System.out.println("");
                         System.out.println("Creat new Item: 1");
                         System.out.println("Edit Item: 2");
                         System.out.println("Delete Item: 3");
                         System.out.println("Show Items: 4");
                         System.out.println("Exit: 5");
-
+                        //switch selector
                         nestSelect = inputCheckerInt();
                         System.out.println("");
 
                         switch (nestSelect) {
 
                             case 1:
+                                //creates an object item so that it can be stored in an arraylist. This uses a default constructor 
+                                //and prompts user input for each setter method coresponding to item info. This is then loaded into the 
+                                //and displayed
                                 Item item = new Item();
                                 System.out.println("Enter new Item name");
 
                                 item.setName(in.nextLine());
+                                //input validation for price
                                 do {
                                     System.out.println("Enter Item price");
                                     priceSet = inputCheckerDouble();
                                 } while (priceSet < 0);
                                 item.setPrice(priceSet);
                                 System.out.println("");
+                                //input validation for discount amount
                                 do {
                                     System.out.println("Enter item discount amount as a percentage");
                                     discSet = inputCheckerInt();
-                                } while (discSet > 0);
+                                } while (discSet < 0);
                                 item.setDiscountAmount(discSet / 100);
                                 System.out.println("");
+                                //input validation for discount eaches
                                 do {
                                     System.out.println("Input the number of items needed for discount");
                                     discAmmSet = inputCheckerInt();
-                                } while (discAmmSet > 0);
+                                } while (discAmmSet < 0);
                                 item.setDiscountEach(discAmmSet);
                                 System.out.println("");
+                                //assigns the arraylist and displays
                                 items.add(0, item);
                                 items.get(0);
                                 break;
                             case 2:
+                                //This case allows the user to edit an item by searching the name, saving the index of the item seacrhed
+                                //and prompting user input to assign new values. Then replaces the item at the position
                                 System.out.println("Input item name you want to edit");
+                                itemSearch=in.nextLine();
                                 for (Item search : items) {
-
-                                    if (search.getName().equalsIgnoreCase(in.nextLine())) {
+                                    //searches for name reguardless of caps
+                                    if (search.getName().equalsIgnoreCase(itemSearch)) {
                                         index = items.indexOf(search);
                                         System.out.println(search);
                                         System.out.println("Enter new name of item");
@@ -207,23 +234,31 @@ public class MainTester {
                                         items.set(index, search);
                                         System.out.println("");
                                         items.get(index);
+                                    }else if (items.indexOf(search)+1==items.size()){
+                                        System.out.println("Item not found");
                                     }
                                 }
                                 break;
 
                             case 3:
                                 System.out.println("Enter name of item to delete");
+                                itemSearch=in.nextLine();
                                 for (Item search : items) {
-                                    if (search.getName().equalsIgnoreCase(in.nextLine())) {
+                                    //searches for name reguardless of caps
+                                    if (search.getName().equalsIgnoreCase(itemSearch)){
                                         System.out.println(search);
                                         index = items.indexOf(search);
                                         items.remove(index);
                                         break;
+                                    }else if (items.indexOf(search)==items.size()-1){
+                                        System.out.println("Item not found");
                                     }
                                 }
                                 break;
                             case 4:
-                                System.out.println(items);
+                                for (Item search: items){
+                                    System.out.println(search);
+                                }
                                 break;
 
                             case 5:
